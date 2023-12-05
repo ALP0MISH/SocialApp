@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">SocialApp</string>
+    <string name="welcome">Welcome</string>
+    <string name="first_onboarding_tilte">Learn languages\ndevelop</string>
+    <string name="first_onboarding_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="second_onboarding_tilte">Track and view\nthe list of\nyour friends</string>
+    <string name="third_onboarding_tilte">Connect wallet</string>
+    <string name="letsgo">Lets Go</string>
+    <string name="Whatts_next">What’ts next ?</string>
+    <string name="got_it">Got it ?</string>
+    <string name="get_started">Get Started</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="password">Password</string>
+    <string name="singup">Sing Up</string>
+    <string name="onboarding_description">Post from people you follow will appear here.\nHere are
+    some suggested people you can follow
+</string>
+    <string name="onboarding_title">Who to follow</string>
+    <string name="dont_have_anaccount">Don\'t have an account?</string>
+    <string name="name">Name</string>
+    <string name="last_name">LastName</string>
+    <string name="email">Email</string>
+    <string name="refresh">Refresh</string>
+    <string name="home">Home</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="edit_profile">Edit Profile</string>
+</resources>
