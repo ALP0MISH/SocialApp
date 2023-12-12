@@ -19,9 +19,9 @@ class SignInUseCaseImpl constructor(
         if (password.isEmpty()) {
             return Result.Error(message = "First fill in password")
         }
-        if (email.isValidString()) {
-            return Result.Error(message = "Incorrect fill email")
-        }
+//        if (email.isValidString()) {
+//            return Result.Error(message = "Incorrect fill email")
+//        }
         if (password.length < 0) {
             return Result.Error(message = "Incorectfill password")
         }

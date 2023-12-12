@@ -44,7 +44,6 @@ class UseCaseModule {
         userRepository = userRepository
     )
 
-
     @Provides
     fun provideFetchCurrentUserUseCase(
         repository: CurrentUserRepository

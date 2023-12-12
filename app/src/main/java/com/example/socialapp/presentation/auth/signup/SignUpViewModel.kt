@@ -8,12 +8,15 @@ import com.example.socialapp.domain.common.Result
 import com.example.socialapp.domain.usecases.current_user.SaveCurrentUserUseCase
 import com.example.socialapp.domain.usecases.sign_up.SignUPUseCase
 import com.example.socialapp.presentation.auth.login.LoginDestination
+import com.example.socialapp.presentation.extensions.createMutableSharedFlowAsSingleLiveEvent
 import com.example.socialapp.presentation.managers.ShowToastUseCase
-import com.example.socialapp.presentation.navigation.NavigatorManager
-import com.example.socialapp.presentation.screens.home.HomeDestination
+import com.example.socialapp.presentation.navigation.GlobalNavigatorManager
+import com.example.socialapp.presentation.navigation.navGraph.MAIN_NAV_GRAPH_ROUTE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -25,8 +28,11 @@ class SignUpViewModel @Inject constructor(
     private val signUPUseCase: SignUPUseCase,
     private val saveCurrentUserUseCase: SaveCurrentUserUseCase,
     private val showToastUseCase: ShowToastUseCase,
-    private val navigatorManager: NavigatorManager
+    private val navigatorManager: GlobalNavigatorManager
 ) : ViewModel() {
+
+    private val _navControllerFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val navControllerFlow: SharedFlow<String> = _navControllerFlow.asSharedFlow()
 
     private val _uiState = MutableStateFlow(SignUpUiState())
     val uiState: StateFlow<SignUpUiState> = _uiState.asStateFlow()
@@ -59,7 +65,7 @@ class SignUpViewModel @Inject constructor(
                 is Result.Success -> {
                     val user = result.data ?: return@launch
                     saveCurrentUserUseCase(user)
-                    navigatorManager.navigateTo(HomeDestination.route(), true)
+                    navigatorManager.navigateTo(MAIN_NAV_GRAPH_ROUTE, true)
                     Log.e("SocialApp", "${result.data}")
                 }
             }
@@ -67,7 +73,7 @@ class SignUpViewModel @Inject constructor(
     }
 
     private fun onLoginClick() {
-        navigatorManager.navigateTo(LoginDestination.route())
+        _navControllerFlow.tryEmit(LoginDestination.route())
     }
 
     private fun doPasswordChange(event: SignUpEvent.OnPasswordChange) {

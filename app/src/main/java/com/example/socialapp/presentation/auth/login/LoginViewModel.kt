@@ -5,17 +5,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.socialapp.domain.common.Result
 import com.example.socialapp.domain.models.UserDomain
-import com.example.socialapp.domain.usecases.current_user.FetchCurrentUserUseCase
 import com.example.socialapp.domain.usecases.current_user.SaveCurrentUserUseCase
 import com.example.socialapp.domain.usecases.signIn.SignInUseCase
 import com.example.socialapp.presentation.auth.signup.SignUpDestination
+import com.example.socialapp.presentation.extensions.createMutableSharedFlowAsSingleLiveEvent
 import com.example.socialapp.presentation.managers.ShowToastUseCase
-import com.example.socialapp.presentation.navigation.NavigatorManager
-import com.example.socialapp.presentation.screens.home.HomeDestination
+import com.example.socialapp.presentation.navigation.GlobalNavigatorManager
+import com.example.socialapp.presentation.navigation.navGraph.MAIN_NAV_GRAPH_ROUTE
 import com.example.socialapp.presentation.screens.splash.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -28,10 +30,13 @@ class LoginViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val saveCurrentUserUseCase: SaveCurrentUserUseCase,
     private val showToastUseCase: ShowToastUseCase,
-    private val navigatorManager: NavigatorManager
+    private val navigatorManager: GlobalNavigatorManager
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
+
+    private val _navControllerFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val navControllerFlow: SharedFlow<String> = _navControllerFlow.asSharedFlow()
 
     fun onEvent(event: LoginEvent) {
         when (event) {
@@ -43,7 +48,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onSingUpCLick() {
-        navigatorManager.navigateTo(SignUpDestination.route())
+        _navControllerFlow.tryEmit(SignUpDestination.route())
     }
 
     private fun onLoginClick() {
@@ -77,7 +82,7 @@ class LoginViewModel @Inject constructor(
                     return
                 }
                 saveCurrentUserUseCase(user)
-                navigatorManager.navigateTo(HomeDestination.route(), false)
+                navigatorManager.navigateTo(MAIN_NAV_GRAPH_ROUTE, false)
                 Log.e(TAG, "data = ${result.message}")
             }
         }

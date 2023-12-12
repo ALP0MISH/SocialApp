@@ -1,11 +1,10 @@
 package com.example.socialapp.presentation.navigation.navGraph
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,11 +22,8 @@ import com.example.socialapp.presentation.screens.onboarding.OnBoardingViewModel
 const val AUTH_NAV_GRAPH_ROUTE = "auth_nav_graph_route"
 
 @Composable
-fun AuthNavGraphRoot(
-
-) {
+fun AuthNavGraphRoot() {
     val navController = rememberNavController()
-
     NavHost(
         navController = navController,
         startDestination = LoginDestination.route()
@@ -40,6 +36,12 @@ fun AuthNavGraphRoot(
         }
         composable(LoginDestination.route()) {
             val viewModel: LoginViewModel = hiltViewModel()
+            val navcontroller by viewModel.navControllerFlow.collectAsStateWithLifecycle(
+                initialValue = null,
+            )
+            LaunchedEffect(key1 = navcontroller) {
+                if (navcontroller != null) navController.navigate(navcontroller!!)
+            }
             LoginScreen(
                 uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
                 onEvent = viewModel::onEvent
@@ -47,6 +49,12 @@ fun AuthNavGraphRoot(
         }
         composable(SignUpDestination.route()) {
             val viewModel: SignUpViewModel = hiltViewModel()
+            val navcontroller by viewModel.navControllerFlow.collectAsStateWithLifecycle(
+                initialValue = null,
+            )
+            LaunchedEffect(key1 = navcontroller) {
+                if (navcontroller != null) navController.navigate(navcontroller!!)
+            }
             SignUpScreen(
                 uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
                 onEvent = viewModel::onEvent

@@ -2,7 +2,7 @@ package com.example.socialapp.di
 
 import com.example.socialapp.presentation.managers.ShowToastUseCase
 import com.example.socialapp.presentation.managers.ToastManager
-import com.example.socialapp.presentation.navigation.NavigatorManager
+import com.example.socialapp.presentation.navigation.GlobalNavigatorManager
 import com.example.socialapp.presentation.navigation.NavigatorManagerImpl
 import dagger.Binds
 import dagger.Module
@@ -18,7 +18,7 @@ interface ManagersModule {
     @Singleton
     fun bindNavigatorManager(
         impl: NavigatorManagerImpl
-    ): NavigatorManager
+    ): GlobalNavigatorManager
 
     @Binds
     @Singleton

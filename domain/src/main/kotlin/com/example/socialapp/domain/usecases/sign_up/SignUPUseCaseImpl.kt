@@ -16,9 +16,9 @@ class SignUPUseCaseImpl constructor(
         name: String,
         password: String
     ): Result<UserDomain> {
-        if (email.isEmpty()) {
-            return Result.Error(message = "First fill in email")
-        }
+//        if (email.isEmpty()) {
+//            return Result.Error(message = "First fill in email")
+//        }
         if (name.isEmpty()) {
             return Result.Error(message = "First fill in name")
         }

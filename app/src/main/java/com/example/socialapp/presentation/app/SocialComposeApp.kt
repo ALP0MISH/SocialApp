@@ -30,6 +30,6 @@ fun SocialComposeApp(
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
-        AppNavGraph(navHostController = navHostController)
+        AppNavGraph(navHostController)
     }
 }
