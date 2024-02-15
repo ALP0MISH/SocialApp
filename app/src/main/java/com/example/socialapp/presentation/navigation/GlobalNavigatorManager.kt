@@ -12,10 +12,8 @@ interface GlobalNavigatorManager {
     fun navigateTo(destination: String, isClearBackstack: Boolean = false)
 }
 
-class NavigatorManagerImpl @Inject constructor(
-) : GlobalNavigatorManager {
+class NavigatorManagerImpl @Inject constructor() : GlobalNavigatorManager {
     private val destinationsFlow = MutableStateFlow("" to false)
-
 
     override fun destinationsFlow(): Flow<Pair<String,Boolean>> {
         return destinationsFlow.asStateFlow().filterNotNull()

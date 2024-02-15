@@ -111,7 +111,7 @@ fun LoadedProfileScreen(
                     )
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.background)
-                    .clickable { onEvent(ProfileEvent.OnEditBackground) },
+                    .clickable { onEvent(ProfileEvent.OnEditProfile) },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

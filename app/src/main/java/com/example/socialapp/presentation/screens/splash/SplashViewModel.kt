@@ -13,8 +13,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-const val TAG = "SocialApp"
-
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val navigatorManager: GlobalNavigatorManager,

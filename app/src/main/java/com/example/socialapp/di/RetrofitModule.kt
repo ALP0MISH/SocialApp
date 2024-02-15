@@ -14,8 +14,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://parseapi.back4app.com/classes/"
-private const val APPLICATION_ID = "MS8t4OdSezeoWuYyhKlsq56gk5pexahC47apQmHN"
+ const val APPLICATION_ID = "MS8t4OdSezeoWuYyhKlsq56gk5pexahC47apQmHN"
 private const val REST_API_KYE = "fa32NaEjKbyI2TM2Fh03LBI7sEga0chAvJNynsfP"
+const val CLIENT_KEY = "nhoeHM3m2u3UG39alDB9fuyL7U6JTvHSr8HFpkbG"
+const val PARSE_BASE_URL = "https://parseapi.back4app.com"
 
 @Module
 @InstallIn(SingletonComponent::class)

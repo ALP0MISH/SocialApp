@@ -55,11 +55,17 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+
+
     //Room
     ksp(libs.room.compiler)
     ksp(libs.room.ktx.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+
+    implementation (libs.androidx.material.icons.extended)
+
+    implementation(libs.parse.android)
 
     implementation(libs.foundation)
 

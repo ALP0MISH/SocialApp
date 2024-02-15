@@ -1,5 +1,8 @@
 package com.example.socialapp.di
 
+import com.example.socialapp.data.clode.service.LoginService
+import com.example.socialapp.data.repositories.MenuRepository
+import com.example.socialapp.data.repositories.MenuRepositoryImpl
 import com.example.socialapp.domain.repositories.CurrentUserRepository
 import com.example.socialapp.domain.repositories.LoginRepository
 import com.example.socialapp.domain.repositories.PostRepository

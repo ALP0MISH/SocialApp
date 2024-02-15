@@ -26,10 +26,16 @@ fun AuthNavGraphRoot() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = LoginDestination.route()
+        startDestination = OnBoardingDestination.route()
     ) {
         composable(OnBoardingDestination.route()) {
             val viewModel: OnBoardingViewModel = hiltViewModel()
+            val navcontroller by viewModel.navControllerFlow.collectAsStateWithLifecycle(
+                initialValue = null,
+            )
+            LaunchedEffect(key1 = navcontroller) {
+                if (navcontroller != null) navController.navigate(navcontroller!!)
+            }
             OnBoardingScreen(
                 navigateToLoginScreen = { viewModel.onBoardingFinished() }
             )

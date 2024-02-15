@@ -12,7 +12,6 @@ import com.example.socialapp.presentation.extensions.createMutableSharedFlowAsSi
 import com.example.socialapp.presentation.managers.ShowToastUseCase
 import com.example.socialapp.presentation.navigation.GlobalNavigatorManager
 import com.example.socialapp.presentation.navigation.navGraph.MAIN_NAV_GRAPH_ROUTE
-import com.example.socialapp.presentation.screens.splash.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -24,6 +23,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private val DEFAULT_ERROR_MESSAGE = "Something went wrong!"
+const val TAG = "SocialApp"
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -85,6 +85,8 @@ class LoginViewModel @Inject constructor(
                 navigatorManager.navigateTo(MAIN_NAV_GRAPH_ROUTE, false)
                 Log.e(TAG, "data = ${result.message}")
             }
+
+            else -> {}
         }
         _uiState.update { currentState ->
             currentState.copy(isAuthentication = false)

@@ -35,6 +35,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+
+
     private suspend fun fetchAllUsers(): List<User> {
         val users = fetchAllUsersUseCase().map { it.toUser() }
         delay(2_000)

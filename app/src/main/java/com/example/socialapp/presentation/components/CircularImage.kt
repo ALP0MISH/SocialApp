@@ -15,7 +15,7 @@ private const val DEFAULT_IMAGE_SIZE = 40
 
 @Composable
 fun CircularImage(
-    path: String?,
+    path: Any?,
     size: Int = DEFAULT_IMAGE_SIZE,
     modifier: Modifier = Modifier
 ) {
